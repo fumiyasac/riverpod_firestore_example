@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "203417529099",
+    "project_id": "bookcommentapp-45d7e",
+    "storage_bucket": "bookcommentapp-45d7e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203417529099:android:4ca963822f19e6832b100e",
+        "android_client_info": {
+          "package_name": "com.example.riverpod_firestore_example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeuJ8OeYPA4eoVxP0-3MMJkNfPDmTMhPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
