@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../view_models/book_provider.dart';
+import '../view_models/book_view_model.dart';
 import 'add_book_page.dart';
 import 'book_detail_page.dart';
 

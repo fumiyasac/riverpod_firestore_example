@@ -2,7 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../models/comment.dart';
 import '../repositories/comment_repository.dart';
 
-part 'comment_provider.g.dart';
+part 'comment_view_model.g.dart';
 
 @riverpod
 class CommentViewModel extends _$CommentViewModel {

@@ -2,7 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../models/book.dart';
 import '../repositories/book_repository.dart';
 
-part 'book_provider.g.dart';
+part 'book_view_model.g.dart';
 
 @riverpod
 class BookViewModel extends _$BookViewModel {
