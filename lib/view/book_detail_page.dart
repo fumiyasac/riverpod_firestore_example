@@ -18,10 +18,6 @@ class BookDetailPage extends ConsumerWidget {
         title: Text(book.title),
         actions: [
           IconButton(
-            icon: Icon(Icons.edit),
-            onPressed: () {},
-          ),
-          IconButton(
             icon: Icon(Icons.delete),
             onPressed: () => _confirmDelete(context, ref),
           ),
