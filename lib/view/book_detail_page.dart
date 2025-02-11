@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/book.dart';
-import '../view_models//book_provider.dart';
-import '../view_models//comment_provider.dart';
+import '../view_models/book_provider.dart';
+import '../view_models/comment_provider.dart';
 
 class BookDetailPage extends ConsumerWidget {
   final Book book;
