@@ -16,6 +16,8 @@ class CommentRepository extends _$CommentRepository {
   Future<List<Comment>> getComments(String bookId) async {
     final snapshot = await _firestore
         .collection('comments')
+        // MEMO: このままだとエラーとなるので、インデックスを追加する必要有
+        // 👉 エラーメッセージに表示されているリンクを押下して設定する
         .where('bookId', isEqualTo: bookId)
         .orderBy('createdAt', descending: true)
         .get();
