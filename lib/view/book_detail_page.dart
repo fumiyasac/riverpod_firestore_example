@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/book.dart';
-import '../providers/book_provider.dart';
-import '../providers/comment_provider.dart';
+import '../view_models//book_provider.dart';
+import '../view_models//comment_provider.dart';
 
 class BookDetailPage extends ConsumerWidget {
   final Book book;
@@ -11,7 +11,7 @@ class BookDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final commentsAsync = ref.watch(commentProviderProvider(book.id));
+    final commentsAsync = ref.watch(commentViewModelProvider(book.id));
 
     return Scaffold(
       appBar: AppBar(
@@ -81,7 +81,7 @@ class BookDetailPage extends ConsumerWidget {
     );
 
     if (confirmed == true) {
-      await ref.read(bookProviderProvider.notifier).deleteBook(book.id);
+      await ref.read(bookViewModelProvider.notifier).deleteBook(book.id);
       if (context.mounted) {
         Navigator.pop(context);
       }
@@ -110,7 +110,7 @@ class BookDetailPage extends ConsumerWidget {
           TextButton(
             onPressed: () async {
               if (controller.text.isNotEmpty) {
-                await ref.read(commentProviderProvider(book.id).notifier)
+                await ref.read(commentViewModelProvider(book.id).notifier)
                     .addComment(book.id, 'currentUserId', controller.text);
                 if (context.mounted) {
                   Navigator.pop(context);

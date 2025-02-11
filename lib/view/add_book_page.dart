@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/book_provider.dart';
+import '../view_models//book_provider.dart';
 
 class AddBookPage extends ConsumerStatefulWidget {
   @override
@@ -26,7 +26,7 @@ class _AddBookPageState extends ConsumerState<AddBookPage> {
     setState(() => _isLoading = true);
 
     try {
-      await ref.read(bookProviderProvider.notifier).addBook(
+      await ref.read(bookViewModelProvider.notifier).addBook(
         _titleController.text,
         _authorController.text,
         'currentUserId',

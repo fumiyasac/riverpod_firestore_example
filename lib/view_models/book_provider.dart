@@ -5,7 +5,7 @@ import '../repositories/book_repository.dart';
 part 'book_provider.g.dart';
 
 @riverpod
-class BookProvider extends _$BookProvider {
+class BookViewModel extends _$BookViewModel {
   @override
   Future<List<Book>> build() async {
     return ref.watch(bookRepositoryProvider).getBooks();

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/book_provider.dart';
+import '../view_models//book_provider.dart';
 import 'add_book_page.dart';
 import 'book_detail_page.dart';
 
 class BookListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final booksAsync = ref.watch(bookProviderProvider);
+    final booksAsync = ref.watch(bookViewModelProvider);
 
     return Scaffold(
       appBar: AppBar(

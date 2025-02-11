@@ -6,7 +6,7 @@ part of 'comment_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$commentProviderHash() => r'0aa71735960599709a5ebfc6181a119109d6492b';
+String _$commentViewModelHash() => r'ffd6dfc78a007c577df817684d7e2c04c83c9373';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-abstract class _$CommentProvider
+abstract class _$CommentViewModel
     extends BuildlessAutoDisposeAsyncNotifier<List<Comment>> {
   late final String bookId;
 
@@ -38,27 +38,27 @@ abstract class _$CommentProvider
   );
 }
 
-/// See also [CommentProvider].
-@ProviderFor(CommentProvider)
-const commentProviderProvider = CommentProviderFamily();
+/// See also [CommentViewModel].
+@ProviderFor(CommentViewModel)
+const commentViewModelProvider = CommentViewModelFamily();
 
-/// See also [CommentProvider].
-class CommentProviderFamily extends Family<AsyncValue<List<Comment>>> {
-  /// See also [CommentProvider].
-  const CommentProviderFamily();
+/// See also [CommentViewModel].
+class CommentViewModelFamily extends Family<AsyncValue<List<Comment>>> {
+  /// See also [CommentViewModel].
+  const CommentViewModelFamily();
 
-  /// See also [CommentProvider].
-  CommentProviderProvider call(
+  /// See also [CommentViewModel].
+  CommentViewModelProvider call(
     String bookId,
   ) {
-    return CommentProviderProvider(
+    return CommentViewModelProvider(
       bookId,
     );
   }
 
   @override
-  CommentProviderProvider getProviderOverride(
-    covariant CommentProviderProvider provider,
+  CommentViewModelProvider getProviderOverride(
+    covariant CommentViewModelProvider provider,
   ) {
     return call(
       provider.bookId,
@@ -77,30 +77,30 @@ class CommentProviderFamily extends Family<AsyncValue<List<Comment>>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'commentProviderProvider';
+  String? get name => r'commentViewModelProvider';
 }
 
-/// See also [CommentProvider].
-class CommentProviderProvider extends AutoDisposeAsyncNotifierProviderImpl<
-    CommentProvider, List<Comment>> {
-  /// See also [CommentProvider].
-  CommentProviderProvider(
+/// See also [CommentViewModel].
+class CommentViewModelProvider extends AutoDisposeAsyncNotifierProviderImpl<
+    CommentViewModel, List<Comment>> {
+  /// See also [CommentViewModel].
+  CommentViewModelProvider(
     String bookId,
   ) : this._internal(
-          () => CommentProvider()..bookId = bookId,
-          from: commentProviderProvider,
-          name: r'commentProviderProvider',
+          () => CommentViewModel()..bookId = bookId,
+          from: commentViewModelProvider,
+          name: r'commentViewModelProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$commentProviderHash,
-          dependencies: CommentProviderFamily._dependencies,
+                  : _$commentViewModelHash,
+          dependencies: CommentViewModelFamily._dependencies,
           allTransitiveDependencies:
-              CommentProviderFamily._allTransitiveDependencies,
+              CommentViewModelFamily._allTransitiveDependencies,
           bookId: bookId,
         );
 
-  CommentProviderProvider._internal(
+  CommentViewModelProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -114,7 +114,7 @@ class CommentProviderProvider extends AutoDisposeAsyncNotifierProviderImpl<
 
   @override
   FutureOr<List<Comment>> runNotifierBuild(
-    covariant CommentProvider notifier,
+    covariant CommentViewModel notifier,
   ) {
     return notifier.build(
       bookId,
@@ -122,10 +122,10 @@ class CommentProviderProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  Override overrideWith(CommentProvider Function() create) {
+  Override overrideWith(CommentViewModel Function() create) {
     return ProviderOverride(
       origin: this,
-      override: CommentProviderProvider._internal(
+      override: CommentViewModelProvider._internal(
         () => create()..bookId = bookId,
         from: from,
         name: null,
@@ -138,14 +138,14 @@ class CommentProviderProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<CommentProvider, List<Comment>>
+  AutoDisposeAsyncNotifierProviderElement<CommentViewModel, List<Comment>>
       createElement() {
-    return _CommentProviderProviderElement(this);
+    return _CommentViewModelProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is CommentProviderProvider && other.bookId == bookId;
+    return other is CommentViewModelProvider && other.bookId == bookId;
   }
 
   @override
@@ -159,18 +159,19 @@ class CommentProviderProvider extends AutoDisposeAsyncNotifierProviderImpl<
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin CommentProviderRef on AutoDisposeAsyncNotifierProviderRef<List<Comment>> {
+mixin CommentViewModelRef
+    on AutoDisposeAsyncNotifierProviderRef<List<Comment>> {
   /// The parameter `bookId` of this provider.
   String get bookId;
 }
 
-class _CommentProviderProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<CommentProvider,
-        List<Comment>> with CommentProviderRef {
-  _CommentProviderProviderElement(super.provider);
+class _CommentViewModelProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<CommentViewModel,
+        List<Comment>> with CommentViewModelRef {
+  _CommentViewModelProviderElement(super.provider);
 
   @override
-  String get bookId => (origin as CommentProviderProvider).bookId;
+  String get bookId => (origin as CommentViewModelProvider).bookId;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

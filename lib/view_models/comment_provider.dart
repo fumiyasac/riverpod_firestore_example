@@ -5,7 +5,7 @@ import '../repositories/comment_repository.dart';
 part 'comment_provider.g.dart';
 
 @riverpod
-class CommentProvider extends _$CommentProvider {
+class CommentViewModel extends _$CommentViewModel {
   @override
   Future<List<Comment>> build(String bookId) async {
     return ref.watch(commentRepositoryProvider).getComments(bookId);

@@ -6,20 +6,21 @@ part of 'book_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$bookProviderHash() => r'b5d490977f2da060ab76c450d6dfa004863c91dd';
+String _$bookViewModelHash() => r'c0bebbcf39aed7f8550605dc6cbde14fa9fdd3dc';
 
-/// See also [BookProvider].
-@ProviderFor(BookProvider)
-final bookProviderProvider =
-    AutoDisposeAsyncNotifierProvider<BookProvider, List<Book>>.internal(
-  BookProvider.new,
-  name: r'bookProviderProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$bookProviderHash,
+/// See also [BookViewModel].
+@ProviderFor(BookViewModel)
+final bookViewModelProvider =
+    AutoDisposeAsyncNotifierProvider<BookViewModel, List<Book>>.internal(
+  BookViewModel.new,
+  name: r'bookViewModelProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$bookViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$BookProvider = AutoDisposeAsyncNotifier<List<Book>>;
+typedef _$BookViewModel = AutoDisposeAsyncNotifier<List<Book>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
