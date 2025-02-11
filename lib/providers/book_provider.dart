@@ -7,21 +7,22 @@ part 'book_provider.g.dart';
 @riverpod
 class BookProvider extends _$BookProvider {
   @override
-  FutureOr<List<Book>> build() async {
-    return ref.watch(bookRepositoryProvider.future);
+  Future<List<Book>> build() async {
+    return ref.watch(bookRepositoryProvider).getBooks();
   }
 
   Future<void> addBook(String title, String author, String userId) async {
-    await ref.read(bookRepositoryProvider.notifier).addBook(
-        title, author, userId);
+    await ref.read(bookRepositoryProvider).addBook(title, author, userId);
+    ref.invalidateSelf();
   }
 
-  Future<void> updateBook(String bookId, String title, String author) async {
-    await ref.read(bookRepositoryProvider.notifier).updateBook(
-        bookId, title, author);
+  Future<void> updateBook(String id, String title, String author) async {
+    await ref.read(bookRepositoryProvider).updateBook(id, title, author);
+    ref.invalidateSelf();
   }
 
-  Future<void> deleteBook(String bookId) async {
-    await ref.read(bookRepositoryProvider.notifier).deleteBook(bookId);
+  Future<void> deleteBook(String id) async {
+    await ref.read(bookRepositoryProvider).deleteBook(id);
+    ref.invalidateSelf();
   }
 }

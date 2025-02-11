@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/book.dart';
+import '../providers/book_provider.dart';
 import '../providers/comment_provider.dart';
 
 class BookDetailPage extends ConsumerWidget {
@@ -10,10 +11,22 @@ class BookDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final commentsAsyncValue = ref.watch(commentProviderProvider(book.id));
+    final commentsAsync = ref.watch(commentProviderProvider(book.id));
 
     return Scaffold(
-      appBar: AppBar(title: Text(book.title)),
+      appBar: AppBar(
+        title: Text(book.title),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () => _confirmDelete(context, ref),
+          ),
+        ],
+      ),
       body: Column(
         children: [
           Padding(
@@ -28,14 +41,14 @@ class BookDetailPage extends ConsumerWidget {
             ),
           ),
           Expanded(
-            child: commentsAsyncValue.when(
+            child: commentsAsync.when(
               data: (comments) => ListView.builder(
                 itemCount: comments.length,
                 itemBuilder: (context, index) {
                   final comment = comments[index];
                   return ListTile(
                     title: Text(comment.content),
-                    subtitle: Text(comment.userId),
+                    subtitle: Text('By: ${comment.userId}'),
                   );
                 },
               ),
@@ -52,15 +65,46 @@ class BookDetailPage extends ConsumerWidget {
     );
   }
 
-  void _showAddCommentDialog(BuildContext context, WidgetRef ref) {
+  Future<void> _confirmDelete(BuildContext context, WidgetRef ref) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Delete Book'),
+        content: Text('Are you sure you want to delete this book?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text('Delete'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      await ref.read(bookProviderProvider.notifier).deleteBook(book.id);
+      if (context.mounted) {
+        Navigator.pop(context);
+      }
+    }
+  }
+
+  Future<void> _showAddCommentDialog(BuildContext context, WidgetRef ref) async {
     final controller = TextEditingController();
-    showDialog(
+
+    return showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Add Comment'),
         content: TextField(
           controller: controller,
-          decoration: InputDecoration(hintText: 'Enter your comment'),
+          decoration: InputDecoration(
+            hintText: 'Enter your comment',
+          ),
+          maxLines: 3,
         ),
         actions: [
           TextButton(
@@ -72,7 +116,9 @@ class BookDetailPage extends ConsumerWidget {
               if (controller.text.isNotEmpty) {
                 await ref.read(commentProviderProvider(book.id).notifier)
                     .addComment(book.id, 'currentUserId', controller.text);
-                Navigator.pop(context);
+                if (context.mounted) {
+                  Navigator.pop(context);
+                }
               }
             },
             child: Text('Add'),

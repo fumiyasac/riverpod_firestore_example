@@ -6,13 +6,12 @@ part of 'book_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$bookRepositoryHash() => r'7875cbc2ed3781243f9df1e0cbf68474c9f2dbb9';
+String _$bookRepositoryHash() => r'6cfb9b16228621d42b3905a2ceab4e6ebaf9b0d3';
 
-/// See also [BookRepository].
-@ProviderFor(BookRepository)
-final bookRepositoryProvider =
-    AutoDisposeAsyncNotifierProvider<BookRepository, List<Book>>.internal(
-  BookRepository.new,
+/// See also [bookRepository].
+@ProviderFor(bookRepository)
+final bookRepositoryProvider = AutoDisposeProvider<BookRepository>.internal(
+  bookRepository,
   name: r'bookRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
@@ -21,6 +20,8 @@ final bookRepositoryProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$BookRepository = AutoDisposeAsyncNotifier<List<Book>>;
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef BookRepositoryRef = AutoDisposeProviderRef<BookRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

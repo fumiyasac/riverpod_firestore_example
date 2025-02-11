@@ -1,37 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Comment {
-  final String id;
-  final String bookId;
-  final String userId;
-  final String content;
-  final DateTime createdAt;
+part 'comment.freezed.dart';
+part 'comment.g.dart';
 
-  Comment({
-    required this.id,
-    required this.bookId,
-    required this.userId,
-    required this.content,
-    required this.createdAt,
-  });
+@freezed
+class Comment with _$Comment {
+  const factory Comment({
+    required String id,
+    required String bookId,
+    required String userId,
+    required String content,
+    required DateTime createdAt,
+  }) = _Comment;
+
+  factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
 
   factory Comment.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    return Comment(
-      id: doc.id,
-      bookId: data['bookId'],
-      userId: data['userId'],
-      content: data['content'],
-      createdAt: (data['createdAt'] as Timestamp).toDate(),
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'bookId': bookId,
-      'userId': userId,
-      'content': content,
-      'createdAt': Timestamp.fromDate(createdAt),
-    };
+    return Comment.fromJson({
+      ...data,
+      'id': doc.id,
+      'createdAt': (data['createdAt'] as Timestamp).toDate().toIso8601String(),
+    });
   }
 }

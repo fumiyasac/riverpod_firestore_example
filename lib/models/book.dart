@@ -1,37 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Book {
-  final String id;
-  final String title;
-  final String author;
-  final String userId;
-  final DateTime createdAt;
+part 'book.freezed.dart';
+part 'book.g.dart';
 
-  Book({
-    required this.id,
-    required this.title,
-    required this.author,
-    required this.userId,
-    required this.createdAt,
-  });
+@freezed
+class Book with _$Book {
+  const factory Book({
+    required String id,
+    required String title,
+    required String author,
+    required String userId,
+    required DateTime createdAt,
+  }) = _Book;
+
+  factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
 
   factory Book.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    return Book(
-      id: doc.id,
-      title: data['title'],
-      author: data['author'],
-      userId: data['userId'],
-      createdAt: (data['createdAt'] as Timestamp).toDate(),
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'title': title,
-      'author': author,
-      'userId': userId,
-      'createdAt': Timestamp.fromDate(createdAt),
-    };
+    return Book.fromJson({
+      ...data,
+      'id': doc.id,
+      'createdAt': (data['createdAt'] as Timestamp).toDate().toIso8601String(),
+    });
   }
 }

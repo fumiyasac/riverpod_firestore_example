@@ -29,18 +29,15 @@ class _AddBookPageState extends ConsumerState<AddBookPage> {
       await ref.read(bookProviderProvider.notifier).addBook(
         _titleController.text,
         _authorController.text,
-        'currentUserId', // TODO: 実際のユーザーIDを使用する
+        'currentUserId',
       );
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Book added successfully')),
-        );
         Navigator.pop(context);
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error adding book: $e')),
+          SnackBar(content: Text('Error: $e')),
         );
       }
     } finally {
@@ -54,20 +51,18 @@ class _AddBookPageState extends ConsumerState<AddBookPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add New Book'),
+        title: Text('Add Book'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
                 controller: _titleController,
                 decoration: InputDecoration(
                   labelText: 'Title',
-                  border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -81,7 +76,6 @@ class _AddBookPageState extends ConsumerState<AddBookPage> {
                 controller: _authorController,
                 decoration: InputDecoration(
                   labelText: 'Author',
-                  border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {

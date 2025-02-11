@@ -7,11 +7,13 @@ import 'book_detail_page.dart';
 class BookListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final booksAsyncValue = ref.watch(bookProviderProvider);
+    final booksAsync = ref.watch(bookProviderProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Book List')),
-      body: booksAsyncValue.when(
+      appBar: AppBar(
+        title: Text('Book List'),
+      ),
+      body: booksAsync.when(
         data: (books) => ListView.builder(
           itemCount: books.length,
           itemBuilder: (context, index) {

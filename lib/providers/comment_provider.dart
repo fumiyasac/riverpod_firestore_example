@@ -7,11 +7,12 @@ part 'comment_provider.g.dart';
 @riverpod
 class CommentProvider extends _$CommentProvider {
   @override
-  FutureOr<List<Comment>> build(String bookId) async {
-    return ref.watch(commentRepositoryProvider(bookId).future);
+  Future<List<Comment>> build(String bookId) async {
+    return ref.watch(commentRepositoryProvider).getComments(bookId);
   }
 
   Future<void> addComment(String bookId, String userId, String content) async {
-    await ref.read(commentRepositoryProvider(bookId).notifier).addComment(bookId, userId, content);
+    await ref.read(commentRepositoryProvider).addComment(bookId, userId, content);
+    ref.invalidateSelf();
   }
 }
