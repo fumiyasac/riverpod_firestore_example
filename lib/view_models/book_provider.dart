@@ -16,11 +16,6 @@ class BookViewModel extends _$BookViewModel {
     ref.invalidateSelf();
   }
 
-  Future<void> updateBook(String id, String title, String author) async {
-    await ref.read(bookRepositoryProvider).updateBook(id, title, author);
-    ref.invalidateSelf();
-  }
-
   Future<void> deleteBook(String id) async {
     await ref.read(bookRepositoryProvider).deleteBook(id);
     ref.invalidateSelf();

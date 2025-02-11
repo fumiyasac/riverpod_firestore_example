@@ -31,13 +31,6 @@ class BookRepository {
     });
   }
 
-  Future<void> updateBook(String id, String title, String author) async {
-    await _firestore.collection('books').doc(id).update({
-      'title': title,
-      'author': author,
-    });
-  }
-
   Future<void> deleteBook(String id) async {
     await _firestore.collection('books').doc(id).delete();
   }
