@@ -1,0 +1,76 @@
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:riverpod_firestore_example/models/book.dart';
+import 'package:riverpod_firestore_example/repositories/book_repository.dart';
+import 'package:riverpod_firestore_example/view_models/book_view_model.dart';
+
+void main() {
+  late FakeFirebaseFirestore fakeFirestore;
+  late BookRepository repository;
+  late ProviderContainer container;
+
+  setUp(() async {
+    fakeFirestore = FakeFirebaseFirestore();
+    // テスト用のデータを事前に追加
+    await fakeFirestore.collection('books').add({
+      'id': '1',
+      'title': 'Test Book No.1',
+      'author': 'Test Author No.1',
+      'userId': 'user1',
+      'createdAt': DateTime.now(),
+      'comments': [],
+    });
+    await fakeFirestore.collection('books').add({
+      'id': '1',
+      'title': 'Test Book No.2',
+      'author': 'Test Author No.2',
+      'userId': 'user2',
+      'createdAt': DateTime.now(),
+      'comments': [],
+    });
+    repository = BookRepository(fakeFirestore);
+    container = ProviderContainer(
+      overrides: [
+        bookRepositoryProvider.overrideWith((ref) => repository),
+      ],
+    );
+  });
+
+  group('BookViewModel with FakeFirestore Tests', () {
+    test('should load books from Firestore', () async {
+      final booksAsync = container.read(bookViewModelProvider);
+      expect(booksAsync, isA<AsyncLoading<List<Book>>>());
+
+      final books = await container.read(bookViewModelProvider.future);
+      expect(books, isNotEmpty);
+      expect(books.first.title, 'Test Book No.2');
+    });
+
+    test('should add book to Firestore', () async {
+      await container.read(bookViewModelProvider.notifier)
+          .addBook('New Test Book', 'New Test Author', 'New user');
+      final querySnapshot = await fakeFirestore.collection('books')
+          .where('title', isEqualTo: 'New Test Book')
+          .get();
+      expect(querySnapshot.docs, hasLength(1));
+      expect(querySnapshot.docs.first.data()['author'], 'New Test Author');
+      expect(querySnapshot.docs.first.data()['userId'], 'New user');
+    });
+
+    test('should delete book from Firestore', () async {
+      final docRef = await fakeFirestore.collection('books').add({
+        'title': 'Book to Delete',
+        'author': 'Author to Delete',
+        'userId': 'User to Delete',
+        'createdAt': DateTime.now(),
+      });
+      await container.read(bookViewModelProvider.notifier)
+          .deleteBook(docRef.id);
+      final deletedDoc = await fakeFirestore.collection('books')
+          .doc(docRef.id)
+          .get();
+      expect(deletedDoc.exists, false);
+    });
+  });
+}
