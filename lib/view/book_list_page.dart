@@ -5,6 +5,8 @@ import 'add_book_page.dart';
 import 'book_detail_page.dart';
 
 class BookListPage extends ConsumerWidget {
+  const BookListPage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final booksAsync = ref.watch(bookViewModelProvider);

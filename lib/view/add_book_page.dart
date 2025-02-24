@@ -3,11 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../view_models/book_view_model.dart';
 
 class AddBookPage extends ConsumerStatefulWidget {
+  const AddBookPage({super.key});
+
   @override
-  _AddBookPageState createState() => _AddBookPageState();
+  AddBookPageState createState() => AddBookPageState();
 }
 
-class _AddBookPageState extends ConsumerState<AddBookPage> {
+class AddBookPageState extends ConsumerState<AddBookPage> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _authorController = TextEditingController();

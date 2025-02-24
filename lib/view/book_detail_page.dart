@@ -7,7 +7,7 @@ import '../view_models/comment_view_model.dart';
 class BookDetailPage extends ConsumerWidget {
   final Book book;
 
-  const BookDetailPage({required this.book});
+  const BookDetailPage({super.key, required this.book});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
