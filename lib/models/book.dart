@@ -10,6 +10,7 @@ class Book with _$Book {
     required String id,
     required String title,
     required String author,
+    required String summary,
     required String userId,
     required DateTime createdAt,
   }) = _Book;
