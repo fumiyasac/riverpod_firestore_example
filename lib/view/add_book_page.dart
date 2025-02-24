@@ -32,7 +32,8 @@ class AddBookPageState extends ConsumerState<AddBookPage> {
       await ref.read(bookViewModelProvider.notifier).addBook(
         _titleController.text,
         _authorController.text,
-        'currentUserId',
+        _summaryController.text,
+        'exampleUserId',
       );
       if (mounted) {
         Navigator.pop(context);

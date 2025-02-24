@@ -11,8 +11,8 @@ class BookViewModel extends _$BookViewModel {
     return ref.watch(bookRepositoryProvider).getBooks();
   }
 
-  Future<void> addBook(String title, String author, String userId) async {
-    await ref.read(bookRepositoryProvider).addBook(title, author, userId);
+  Future<void> addBook(String title, String author, String summary, String userId) async {
+    await ref.read(bookRepositoryProvider).addBook(title, author, summary, userId);
     ref.invalidateSelf();
   }
 

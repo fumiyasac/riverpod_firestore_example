@@ -22,10 +22,11 @@ class BookRepository {
     return snapshot.docs.map((doc) => Book.fromFirestore(doc)).toList();
   }
 
-  Future<void> addBook(String title, String author, String userId) async {
+  Future<void> addBook(String title, String author, String summary, String userId) async {
     await _firestore.collection('books').add({
       'title': title,
       'author': author,
+      'summary': summary,
       'userId': userId,
       'createdAt': FieldValue.serverTimestamp(),
     });
