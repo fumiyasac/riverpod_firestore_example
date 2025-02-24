@@ -3,11 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:riverpod_firestore_example/models/book.dart';
 import 'package:riverpod_firestore_example/repositories/book_repository.dart';
+import 'package:riverpod_firestore_example/repositories/comment_repository.dart';
 import 'package:riverpod_firestore_example/view_models/book_view_model.dart';
 
 void main() {
   late FakeFirebaseFirestore fakeFirestore;
-  late BookRepository repository;
+  late BookRepository bookRepository;
+  late CommentRepository commentRepository;
   late ProviderContainer container;
 
   setUp(() async {
@@ -31,10 +33,12 @@ void main() {
       'createdAt': DateTime.now(),
       'comments': [],
     });
-    repository = BookRepository(fakeFirestore);
+    bookRepository = BookRepository(fakeFirestore);
+    commentRepository = CommentRepository(fakeFirestore);
     container = ProviderContainer(
       overrides: [
-        bookRepositoryProvider.overrideWith((ref) => repository),
+        bookRepositoryProvider.overrideWith((ref) => bookRepository),
+        commentRepositoryProvider.overrideWith((ref) => commentRepository),
       ],
     );
   });
@@ -61,18 +65,18 @@ void main() {
     });
 
     test('should delete book from Firestore', () async {
-      final docRef = await fakeFirestore.collection('books').add({
+      final bookDocRef = await fakeFirestore.collection('books').add({
         'title': 'Book to Delete',
         'author': 'Author to Delete',
         'userId': 'exampleUserId',
         'createdAt': DateTime.now(),
       });
       await container.read(bookViewModelProvider.notifier)
-          .deleteBook(docRef.id);
-      final deletedDoc = await fakeFirestore.collection('books')
-          .doc(docRef.id)
+          .deleteBook(bookDocRef.id);
+      final deletedBookDoc = await fakeFirestore.collection('books')
+          .doc(bookDocRef.id)
           .get();
-      expect(deletedDoc.exists, false);
+      expect(deletedBookDoc.exists, false);
     });
   });
 }
