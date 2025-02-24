@@ -17,7 +17,8 @@ void main() {
       'id': '1',
       'title': 'Test Book No.1',
       'author': 'Test Author No.1',
-      'userId': 'user1',
+      'summary': 'Test Summary No.1',
+      'userId': 'exampleUserId',
       'createdAt': DateTime.now(),
       'comments': [],
     });
@@ -25,7 +26,8 @@ void main() {
       'id': '1',
       'title': 'Test Book No.2',
       'author': 'Test Author No.2',
-      'userId': 'user2',
+      'summary': 'Test Summary No.2',
+      'userId': 'exampleUserId',
       'createdAt': DateTime.now(),
       'comments': [],
     });
@@ -41,7 +43,6 @@ void main() {
     test('should load books from Firestore', () async {
       final booksAsync = container.read(bookViewModelProvider);
       expect(booksAsync, isA<AsyncLoading<List<Book>>>());
-
       final books = await container.read(bookViewModelProvider.future);
       expect(books, isNotEmpty);
       expect(books.first.title, 'Test Book No.2');
@@ -49,20 +50,21 @@ void main() {
 
     test('should add book to Firestore', () async {
       await container.read(bookViewModelProvider.notifier)
-          .addBook('New Test Book', 'New Test Author', 'New user');
+          .addBook('New Test Book', 'New Test Author', 'New Test Summary', 'exampleUserId');
       final querySnapshot = await fakeFirestore.collection('books')
           .where('title', isEqualTo: 'New Test Book')
           .get();
       expect(querySnapshot.docs, hasLength(1));
       expect(querySnapshot.docs.first.data()['author'], 'New Test Author');
-      expect(querySnapshot.docs.first.data()['userId'], 'New user');
+      expect(querySnapshot.docs.first.data()['summary'], 'New Test Summary');
+      expect(querySnapshot.docs.first.data()['userId'], 'exampleUserId');
     });
 
     test('should delete book from Firestore', () async {
       final docRef = await fakeFirestore.collection('books').add({
         'title': 'Book to Delete',
         'author': 'Author to Delete',
-        'userId': 'User to Delete',
+        'userId': 'exampleUserId',
         'createdAt': DateTime.now(),
       });
       await container.read(bookViewModelProvider.notifier)

@@ -18,23 +18,26 @@ void main() {
         'id': '1',
         'title': 'Test Book No.1',
         'author': 'Test Author No.1',
-        'userId': 'user1',
+        'summary': 'Test Summary No.1',
+        'userId': 'exampleUserId',
         'createdAt': DateTime.now(),
         'comments': [],
       };
       final testData2 = {
-        'id': '1',
+        'id': '2',
         'title': 'Test Book No.2',
         'author': 'Test Author No.2',
-        'userId': 'user2',
+        'summary': 'Test Summary No.2',
+        'userId': 'exampleUserId',
         'createdAt': DateTime.now(),
         'comments': [],
       };
       final testData3 = {
-        'id': '1',
+        'id': '3',
         'title': 'Test Book No.3',
         'author': 'Test Author No.3',
-        'userId': 'user3',
+        'summary': 'Test Summary No.3',
+        'userId': 'exampleUserId',
         'createdAt': DateTime.now(),
         'comments': [],
       };
@@ -55,7 +58,7 @@ void main() {
     test('addBook successfully adds a book', () async {
 
       // 新規の本を作成（IDは空文字列または任意の文字列）
-      await repository.addBook('New Book', 'New Author', 'user1');
+      await repository.addBook('New Book', 'New Author', 'New Summary', 'exampleUserId');
 
       // 追加された本を取得
       final books = await repository.getBooks();
@@ -72,7 +75,8 @@ void main() {
       final docRef = await fakeFirestore.collection('books').add({
         'title': 'Test Book',
         'author': 'Test Author',
-        'userId': 'user1',
+        'summary': 'Test Summary',
+        'userId': 'exampleUserId',
         'createdAt': DateTime.now(),
         'comments': [],
       });
