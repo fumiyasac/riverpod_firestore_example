@@ -84,6 +84,7 @@ class BookDetailPage extends ConsumerWidget {
                         Text(comment.content),
                         SizedBox(height: 6),
                         Text('By: ${comment.userId}'),
+                        SizedBox(height: 8),
                       ],
                     );
                   },
@@ -106,16 +107,16 @@ class BookDetailPage extends ConsumerWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Delete Book'),
-        content: Text('Are you sure you want to delete this book?'),
+        title: Text('参考書を削除'),
+        content: Text('この参考書の内容を削除しますか?\n※これまで投稿されたメモも削除されますのでご注意下さい。'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text('Cancel'),
+            child: Text('キャンセル'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text('Delete'),
+            child: Text('削除する'),
           ),
         ],
       ),
@@ -131,22 +132,30 @@ class BookDetailPage extends ConsumerWidget {
 
   Future<void> _showAddCommentDialog(BuildContext context, WidgetRef ref) async {
     final controller = TextEditingController();
-
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Add Comment'),
-        content: TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            hintText: 'Enter your comment',
+        title: Text('進める際のメモを追加する'),
+        content: Container(
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(8),
           ),
-          maxLines: 3,
+          child: TextField(
+            controller: controller,
+            decoration: InputDecoration(
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              hintText: '例: 勉強を進めた時に「こうすればうまくいった」「この点に注意」等ををお伝えしましょう。',
+            ),
+            maxLines: 3,
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: Text('キャンセル'),
           ),
           TextButton(
             onPressed: () async {
@@ -158,7 +167,7 @@ class BookDetailPage extends ConsumerWidget {
                 }
               }
             },
-            child: Text('Add'),
+            child: Text('新規追加する'),
           ),
         ],
       ),

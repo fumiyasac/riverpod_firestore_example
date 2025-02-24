@@ -138,11 +138,11 @@ class AddBookPageState extends ConsumerState<AddBookPage> {
                 ),
                 onPressed: _isLoading ? null : _submitBook,
                 child: _isLoading
-                    ? SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                )
+                  ? SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
                     : Text('参考書を新規追加する'),
               ),
             ],
