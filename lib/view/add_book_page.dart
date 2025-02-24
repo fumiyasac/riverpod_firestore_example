@@ -13,6 +13,7 @@ class AddBookPageState extends ConsumerState<AddBookPage> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _authorController = TextEditingController();
+  final _summaryController = TextEditingController();
   bool _isLoading = false;
 
   @override
@@ -53,7 +54,7 @@ class AddBookPageState extends ConsumerState<AddBookPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Book'),
+        title: Text('参考書を新規追加'),
       ),
       body: Padding(
         padding: EdgeInsets.all(16),
@@ -61,33 +62,79 @@ class AddBookPageState extends ConsumerState<AddBookPage> {
           key: _formKey,
           child: Column(
             children: [
-              TextFormField(
-                controller: _titleController,
-                decoration: InputDecoration(
-                  labelText: 'Title',
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a title';
-                  }
-                  return null;
-                },
+                child: TextFormField(
+                  controller: _titleController,
+                  decoration: InputDecoration(
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    labelText: '参考書タイトル',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return '参考書タイトルは必須項目です。';
+                    }
+                    return null;
+                  },
+                ),
               ),
               SizedBox(height: 16),
-              TextFormField(
-                controller: _authorController,
-                decoration: InputDecoration(
-                  labelText: 'Author',
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter an author';
-                  }
-                  return null;
-                },
+                child: TextFormField(
+                  controller: _authorController,
+                  decoration: InputDecoration(
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    labelText: '著者や出版情報',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return '著者や出版情報は必須項目です。';
+                    }
+                    return null;
+                  },
+                ),
               ),
-              SizedBox(height: 24),
+              SizedBox(height: 16),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: TextFormField(
+                  controller: _summaryController,
+                  decoration: InputDecoration(
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    labelText: '参考書の特徴に関する情報',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return '参考書の特徴に関する情報は必須項目です。';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              SizedBox(height: 16),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 12,
+                  ),
+                ),
                 onPressed: _isLoading ? null : _submitBook,
                 child: _isLoading
                     ? SizedBox(
@@ -95,7 +142,7 @@ class AddBookPageState extends ConsumerState<AddBookPage> {
                   width: 20,
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
-                    : Text('Add Book'),
+                    : Text('参考書を新規追加する'),
               ),
             ],
           ),
