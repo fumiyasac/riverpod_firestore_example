@@ -66,17 +66,41 @@ void main() {
 
     test('should delete book from Firestore', () async {
       final bookDocRef = await fakeFirestore.collection('books').add({
+        'id': '9999',
         'title': 'Book to Delete',
         'author': 'Author to Delete',
         'userId': 'exampleUserId',
         'createdAt': DateTime.now(),
       });
+      await fakeFirestore.collection('comments').add({
+        'id': '1',
+        'bookId': '9999',
+        'content': 'Test Content No.1',
+        'userId': 'exampleUserId',
+        'createdAt': DateTime.now(),
+      });
+      await fakeFirestore.collection('comments').add({
+        'id': '2',
+        'bookId': '9999',
+        'content': 'Test Content No.2',
+        'userId': 'exampleUserId',
+        'createdAt': DateTime.now(),
+      });
+      final commentDoc = await fakeFirestore.collection('comments')
+          .where('bookId', isEqualTo: '9999')
+          .get();
+      expect(commentDoc.docs.length, 2);
+
       await container.read(bookViewModelProvider.notifier)
           .deleteBook(bookDocRef.id);
       final deletedBookDoc = await fakeFirestore.collection('books')
           .doc(bookDocRef.id)
           .get();
+      final deletedCommentDoc = await fakeFirestore.collection('books')
+          .where('bookId', isEqualTo: '9999')
+          .get();
       expect(deletedBookDoc.exists, false);
+      expect(deletedCommentDoc.docs.length, 0);
     });
   });
 }
