@@ -25,7 +25,7 @@ void main() {
       'comments': [],
     });
     await fakeFirestore.collection('books').add({
-      'id': '1',
+      'id': '2',
       'title': 'Test Book No.2',
       'author': 'Test Author No.2',
       'summary': 'Test Summary No.2',
@@ -86,8 +86,9 @@ void main() {
         'userId': 'exampleUserId',
         'createdAt': DateTime.now(),
       });
+      final bookId = '9999';
       final commentDoc = await fakeFirestore.collection('comments')
-          .where('bookId', isEqualTo: '9999')
+          .where('bookId', isEqualTo: bookId)
           .get();
       expect(commentDoc.docs.length, 2);
 
@@ -97,7 +98,7 @@ void main() {
           .doc(bookDocRef.id)
           .get();
       final deletedCommentDoc = await fakeFirestore.collection('books')
-          .where('bookId', isEqualTo: '9999')
+          .where('bookId', isEqualTo: bookId)
           .get();
       expect(deletedBookDoc.exists, false);
       expect(deletedCommentDoc.docs.length, 0);
