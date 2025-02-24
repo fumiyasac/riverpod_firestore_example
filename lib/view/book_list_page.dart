@@ -21,6 +21,11 @@ class BookListPage extends ConsumerWidget {
           itemBuilder: (context, index) {
             final book = books[index];
             return ListTile(
+              leading: Image.network(
+                'https://ndlsearch.ndl.go.jp/thumbnail/${book.isbn}.jpg',
+                fit: BoxFit.fitHeight,
+                height: 40,
+              ),
               title: Text(book.title),
               subtitle: Text(book.author),
               onTap: () => Navigator.push(
