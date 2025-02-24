@@ -26,12 +26,23 @@ class CommentRepository {
   }
 
   Future<void> addComment(String bookId, String userId, String content) async {
-    await _firestore.collection('comments').add({
-      'bookId': bookId,
-      'userId': userId,
-      'content': content,
-      'createdAt': FieldValue.serverTimestamp(),
-    });
+    await _firestore
+      .collection('comments').add({
+        'bookId': bookId,
+        'userId': userId,
+        'content': content,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+  }
+
+  Future<void> deleteComment(String bookId) async {
+    final snapshot = await _firestore
+      .collection('comments')
+      .where('bookId', isEqualTo: bookId)
+      .get();
+    for (var doc in snapshot.docs) {
+      doc.reference.delete();
+    }
   }
 }
 

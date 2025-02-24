@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:riverpod_firestore_example/repositories/comment_repository.dart';
 import '../models/book.dart';
 import '../repositories/book_repository.dart';
 
@@ -18,6 +19,7 @@ class BookViewModel extends _$BookViewModel {
 
   Future<void> deleteBook(String id) async {
     await ref.read(bookRepositoryProvider).deleteBook(id);
+    await ref.read(commentRepositoryProvider).deleteComment(id);
     ref.invalidateSelf();
   }
 }
