@@ -24,6 +24,7 @@ mixin _$Book {
   String get title => throw _privateConstructorUsedError;
   String get author => throw _privateConstructorUsedError;
   String get summary => throw _privateConstructorUsedError;
+  String get isbn => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
 
@@ -46,6 +47,7 @@ abstract class $BookCopyWith<$Res> {
       String title,
       String author,
       String summary,
+      String isbn,
       String userId,
       DateTime createdAt});
 }
@@ -69,6 +71,7 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
     Object? title = null,
     Object? author = null,
     Object? summary = null,
+    Object? isbn = null,
     Object? userId = null,
     Object? createdAt = null,
   }) {
@@ -88,6 +91,10 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
       summary: null == summary
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
+              as String,
+      isbn: null == isbn
+          ? _value.isbn
+          : isbn // ignore: cast_nullable_to_non_nullable
               as String,
       userId: null == userId
           ? _value.userId
@@ -113,6 +120,7 @@ abstract class _$$BookImplCopyWith<$Res> implements $BookCopyWith<$Res> {
       String title,
       String author,
       String summary,
+      String isbn,
       String userId,
       DateTime createdAt});
 }
@@ -133,6 +141,7 @@ class __$$BookImplCopyWithImpl<$Res>
     Object? title = null,
     Object? author = null,
     Object? summary = null,
+    Object? isbn = null,
     Object? userId = null,
     Object? createdAt = null,
   }) {
@@ -152,6 +161,10 @@ class __$$BookImplCopyWithImpl<$Res>
       summary: null == summary
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
+              as String,
+      isbn: null == isbn
+          ? _value.isbn
+          : isbn // ignore: cast_nullable_to_non_nullable
               as String,
       userId: null == userId
           ? _value.userId
@@ -173,6 +186,7 @@ class _$BookImpl implements _Book {
       required this.title,
       required this.author,
       required this.summary,
+      required this.isbn,
       required this.userId,
       required this.createdAt});
 
@@ -188,13 +202,15 @@ class _$BookImpl implements _Book {
   @override
   final String summary;
   @override
+  final String isbn;
+  @override
   final String userId;
   @override
   final DateTime createdAt;
 
   @override
   String toString() {
-    return 'Book(id: $id, title: $title, author: $author, summary: $summary, userId: $userId, createdAt: $createdAt)';
+    return 'Book(id: $id, title: $title, author: $author, summary: $summary, isbn: $isbn, userId: $userId, createdAt: $createdAt)';
   }
 
   @override
@@ -206,6 +222,7 @@ class _$BookImpl implements _Book {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.author, author) || other.author == author) &&
             (identical(other.summary, summary) || other.summary == summary) &&
+            (identical(other.isbn, isbn) || other.isbn == isbn) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
@@ -213,8 +230,8 @@ class _$BookImpl implements _Book {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, title, author, summary, userId, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, title, author, summary, isbn, userId, createdAt);
 
   /// Create a copy of Book
   /// with the given fields replaced by the non-null parameter values.
@@ -238,6 +255,7 @@ abstract class _Book implements Book {
       required final String title,
       required final String author,
       required final String summary,
+      required final String isbn,
       required final String userId,
       required final DateTime createdAt}) = _$BookImpl;
 
@@ -251,6 +269,8 @@ abstract class _Book implements Book {
   String get author;
   @override
   String get summary;
+  @override
+  String get isbn;
   @override
   String get userId;
   @override

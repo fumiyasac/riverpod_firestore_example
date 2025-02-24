@@ -20,6 +20,7 @@ void main() {
       'title': 'Test Book No.1',
       'author': 'Test Author No.1',
       'summary': 'Test Summary No.1',
+      'isbn': '1111111111111',
       'userId': 'exampleUserId',
       'createdAt': DateTime.now(),
       'comments': [],
@@ -29,6 +30,7 @@ void main() {
       'title': 'Test Book No.2',
       'author': 'Test Author No.2',
       'summary': 'Test Summary No.2',
+      'isbn': '2222222222222',
       'userId': 'exampleUserId',
       'createdAt': DateTime.now(),
       'comments': [],
@@ -54,13 +56,14 @@ void main() {
 
     test('should add book to Firestore', () async {
       await container.read(bookViewModelProvider.notifier)
-          .addBook('New Test Book', 'New Test Author', 'New Test Summary', 'exampleUserId');
+          .addBook('New Test Book', 'New Test Author', 'New Test Summary', '123456789012', 'exampleUserId');
       final querySnapshot = await fakeFirestore.collection('books')
           .where('title', isEqualTo: 'New Test Book')
           .get();
       expect(querySnapshot.docs, hasLength(1));
       expect(querySnapshot.docs.first.data()['author'], 'New Test Author');
       expect(querySnapshot.docs.first.data()['summary'], 'New Test Summary');
+      expect(querySnapshot.docs.first.data()['isbn'], '123456789012');
       expect(querySnapshot.docs.first.data()['userId'], 'exampleUserId');
     });
 

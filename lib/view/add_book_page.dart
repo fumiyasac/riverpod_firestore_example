@@ -21,6 +21,8 @@ class AddBookPageState extends ConsumerState<AddBookPage> {
   void dispose() {
     _titleController.dispose();
     _authorController.dispose();
+    _summaryController.dispose();
+    _isbnController.dispose();
     super.dispose();
   }
 
@@ -34,6 +36,7 @@ class AddBookPageState extends ConsumerState<AddBookPage> {
         _titleController.text,
         _authorController.text,
         _summaryController.text,
+        _isbnController.text,
         'exampleUserId',
       );
       if (mounted) {

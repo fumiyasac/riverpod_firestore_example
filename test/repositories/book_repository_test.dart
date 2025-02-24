@@ -19,6 +19,7 @@ void main() {
         'title': 'Test Book No.1',
         'author': 'Test Author No.1',
         'summary': 'Test Summary No.1',
+        'isbn': '1111111111111',
         'userId': 'exampleUserId',
         'createdAt': DateTime.now(),
         'comments': [],
@@ -28,6 +29,7 @@ void main() {
         'title': 'Test Book No.2',
         'author': 'Test Author No.2',
         'summary': 'Test Summary No.2',
+        'isbn': '2222222222222',
         'userId': 'exampleUserId',
         'createdAt': DateTime.now(),
         'comments': [],
@@ -37,6 +39,7 @@ void main() {
         'title': 'Test Book No.3',
         'author': 'Test Author No.3',
         'summary': 'Test Summary No.3',
+        'isbn': '3333333333333',
         'userId': 'exampleUserId',
         'createdAt': DateTime.now(),
         'comments': [],
@@ -58,7 +61,7 @@ void main() {
     test('addBook successfully adds a book', () async {
 
       // 新規の本を作成（IDは空文字列または任意の文字列）
-      await repository.addBook('New Book', 'New Author', 'New Summary', 'exampleUserId');
+      await repository.addBook('New Book', 'New Author', 'New Summary', '123456789012', 'exampleUserId');
 
       // 追加された本を取得
       final books = await repository.getBooks();
@@ -76,6 +79,7 @@ void main() {
         'title': 'Test Book',
         'author': 'Test Author',
         'summary': 'Test Summary',
+        'isbn': '123456789012',
         'userId': 'exampleUserId',
         'createdAt': DateTime.now(),
         'comments': [],

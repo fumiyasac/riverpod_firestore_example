@@ -11,6 +11,7 @@ _$BookImpl _$$BookImplFromJson(Map<String, dynamic> json) => _$BookImpl(
       title: json['title'] as String,
       author: json['author'] as String,
       summary: json['summary'] as String,
+      isbn: json['isbn'] as String,
       userId: json['userId'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
@@ -21,6 +22,7 @@ Map<String, dynamic> _$$BookImplToJson(_$BookImpl instance) =>
       'title': instance.title,
       'author': instance.author,
       'summary': instance.summary,
+      'isbn': instance.isbn,
       'userId': instance.userId,
       'createdAt': instance.createdAt.toIso8601String(),
     };
