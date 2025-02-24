@@ -13,7 +13,7 @@ class BookListPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Book List'),
+        title: Text('おすすめ参考書一覧'),
       ),
       body: booksAsync.when(
         data: (books) => ListView.builder(

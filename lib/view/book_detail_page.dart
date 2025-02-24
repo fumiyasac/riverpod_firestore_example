@@ -23,36 +23,77 @@ class BookDetailPage extends ConsumerWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Author: ${book.author}'),
-                SizedBox(height: 16),
-                Text('Comments:'),
-              ],
-            ),
-          ),
-          Expanded(
-            child: commentsAsync.when(
-              data: (comments) => ListView.builder(
-                itemCount: comments.length,
-                itemBuilder: (context, index) {
-                  final comment = comments[index];
-                  return ListTile(
-                    title: Text(comment.content),
-                    subtitle: Text('By: ${comment.userId}'),
-                  );
-                },
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '📕 著者や出版情報:',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
               ),
-              loading: () => Center(child: CircularProgressIndicator()),
-              error: (error, stack) => Center(child: Text('Error: $error')),
             ),
-          ),
-        ],
+            SizedBox(height: 8),
+            Flexible(
+              child: Text(
+                book.author,
+                style: TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                ),
+                maxLines: 5,
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              '🏃 ‍参考書の特徴に関する情報:',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: 8),
+            Flexible(
+              child: Text(
+                book.summary,
+                style: TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                ),
+                maxLines: 5,
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              '🗒️ 参考書を進める際のメモ:',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: 8),
+            Expanded(
+              child: commentsAsync.when(
+                data: (comments) => ListView.builder(
+                  itemCount: comments.length,
+                  itemBuilder: (context, index) {
+                    final comment = comments[index];
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(comment.content),
+                        SizedBox(height: 6),
+                        Text('By: ${comment.userId}'),
+                      ],
+                    );
+                  },
+                ),
+                loading: () => Center(child: CircularProgressIndicator()),
+                error: (error, stack) => Center(child: Text('Error: $error')),
+              ),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddCommentDialog(context, ref),
