@@ -6,13 +6,19 @@ Flutter ＆ Riverpod & Firestore & Freezedを利用した簡易的な書籍メ�
 
 __【画面スクリーンショット】__
 
+サンプル的には参考書を登録して、任意の参考書に紐づくコメントを複数件書き込む事ができるだけのシンプルなものになります。
+
 <img src="./images/example_capture1.png" width="320"> <img src="./images/example_capture2.png" width="320">
 
 <img src="./images/example_capture3.png" width="320"> <img src="./images/example_capture4.png" width="320">
 
 __【Firestoreでのデータ保持】__
 
+① 参考書を管理するCollection
+
 <img src="./images/firestore_database1.png"> 
+
+② 参考書に紐づくコメントを管理するCollection
 
 <img src="./images/firestore_database2.png">
 
