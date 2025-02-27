@@ -4,7 +4,17 @@
 
 Flutter ＆ Riverpod & Firestore & Freezedを利用した簡易的な書籍メモ管理アプリサンプルになります。
 
-__【画面スクリーンショット】__
+### 1. 想定アーキテクチャ概要
+
+```mermaid
+flowchart LR
+    id1(View) --> id2
+    id2(ViewModel) --> id3
+    id3(Repository) --> id4
+    id4(Firestore)
+```
+
+### 2. 画面スクリーンショット
 
 サンプル的には参考書を登録して、任意の参考書に紐づくコメントを複数件書き込む事ができるだけのシンプルなものになります。
 
@@ -12,7 +22,7 @@ __【画面スクリーンショット】__
 
 <img src="./images/example_capture3.png" width="320"> <img src="./images/example_capture4.png" width="320">
 
-__【Firestoreでのデータ保持】__
+### 3. Firestoreでのデータ保持
 
 ① 参考書を管理するCollection
 
