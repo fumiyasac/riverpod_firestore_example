@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:riverpod_firestore_example/models/comment.dart';
 import 'package:riverpod_firestore_example/repositories/comment_repository.dart';
-import 'package:riverpod_firestore_example/view_models/book_view_model.dart';
 import 'package:riverpod_firestore_example/view_models/comment_view_model.dart';
 
 void main() {
