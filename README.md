@@ -22,7 +22,42 @@ flowchart LR
 
 <img src="./images/example_capture3.png" width="320"> <img src="./images/example_capture4.png" width="320">
 
-### 3. Firestoreでのデータ保持
+### 3.サンプル構築の際に利用したもの
+
+__【サンプルで利用したパッケージ】__
+
+- flutter_riverpod:
+    - 状態管理
+    - https://pub.dev/packages/flutter_riverpod
+- firebase_core:
+    - Firebase Flutterに必要なプラグイン
+    - https://pub.dev/packages/firebase_core
+- cloud_firestore:
+    - Cloud Firestoreを利用するために必要なプラグイン
+    - https://pub.dev/packages/cloud_firestore
+- build_runner:
+    - コード自動生成の実行
+    - https://pub.dev/packages/build_runner
+- riverpod_annotation
+    - `@riverpod`アノテーションの利用
+    - https://pub.dev/packages/riverpod_annotation
+- riverpod_generator:
+    - RiverpodのおけるProviderの自動生成
+    - https://pub.dev/packages/build_runner
+- freezed:
+    - コード生成ベースのImmutableなクラス生成
+    - https://pub.dev/packages/freezed
+- freezed_annotation:
+    - freezedパッケージと連携して動作するアノテーションパッケージ
+    - https://pub.dev/packages/freezed_annotation
+- json_serializable:
+    - DartのオブジェクトとJSON間の変換を自動化するコード生成パッケージ
+    - https://pub.dev/packages/json_serializable
+- fake_cloud_firestore:
+    - Firebase Cloud Firestore のモックライブラリ
+    - https://pub.dev/packages/fake_cloud_firestore
+
+### 4. Firestoreでのデータ保持
 
 ① 参考書を管理するCollection
 
