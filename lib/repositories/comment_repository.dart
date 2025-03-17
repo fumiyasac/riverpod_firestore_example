@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../models/comment.dart';
 
 part 'comment_repository.g.dart';
 
 @riverpod
-CommentRepository commentRepository(CommentRepositoryRef ref) {
+CommentRepository commentRepository(Ref ref) {
   return CommentRepository(FirebaseFirestore.instance);
 }
 
